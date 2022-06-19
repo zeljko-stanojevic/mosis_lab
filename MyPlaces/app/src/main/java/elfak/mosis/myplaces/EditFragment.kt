@@ -27,9 +27,6 @@ class EditFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,22 +35,6 @@ class EditFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_edit, container, false)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_my_places_list -> {
-                this.findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        val item = menu.findItem(R.id.action_new_place)
-        item.isVisible = false
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,11 +69,11 @@ class EditFragment : Fragment() {
             } else {
                 myPlacesViewModel.addPlace(MyPlace(name, desc))
             }
-            findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
+            findNavController().popBackStack()
         }
         val cancelButton: Button = requireView().findViewById<Button>(R.id.editmyplace_cancel_button)
         cancelButton.setOnClickListener {
-            findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
+            findNavController().popBackStack()
         }
     }
 
