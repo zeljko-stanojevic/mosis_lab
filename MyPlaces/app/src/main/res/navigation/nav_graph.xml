@@ -42,7 +42,11 @@
         android:name="elfak.mosis.myplaces.EditFragment"
         android:label="@string/edit_fragment_label"
         tools:layout="@layout/fragment_edit">
+        <action
+            android:id="@+id/action_EditFragment_to_MapFragment"
+            app:destination="@+id/MapFragment">
 
+        </action>
     </fragment>
     <fragment
         android:id="@+id/ViewFragment"
