@@ -41,6 +41,8 @@ class EditFragment : Fragment() {
         val addButton : Button = requireView().findViewById<Button>(R.id.editmyplace_finished_button)
         val editName: EditText = requireView().findViewById<EditText>(R.id.editmyplace_name_edit)
         val editDescription : EditText = requireView().findViewById<EditText>(R.id.editmyplace_desc_edit)
+        val editLongitude : EditText = requireView().findViewById<EditText>(R.id.editmyplace_longitude_edit)
+        val editLatitude: EditText = requireView().findViewById(R.id.editmyplace_latitude_edit)
         if (myPlacesViewModel.selected != null) {
             editName.setText(myPlacesViewModel.selected?.name)
             editDescription.setText(myPlacesViewModel.selected?.description)
@@ -63,11 +65,15 @@ class EditFragment : Fragment() {
         addButton.setOnClickListener {
             val name: String = editName.text.toString()
             val desc: String = editDescription.text.toString()
+            val longitude : String = editLongitude.text.toString()
+            val latitude : String = editLatitude.text.toString()
             if (myPlacesViewModel.selected != null) {
                 myPlacesViewModel.selected?.name = name
                 myPlacesViewModel.selected?.description = desc
+                myPlacesViewModel.selected?.longitude = longitude
+                myPlacesViewModel.selected?.latitude = latitude
             } else {
-                myPlacesViewModel.addPlace(MyPlace(name, desc))
+                myPlacesViewModel.addPlace(MyPlace(name, desc, longitude, latitude))
             }
             findNavController().popBackStack()
         }
